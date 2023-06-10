@@ -6,10 +6,7 @@ const HOME = 'products?limit=10';
 
 const GET_CATEGORIES = 'products/categories';
 
-// const FAVORITES = 'favorites';
-
 const PROFILE = 'users';
 
 const UPDATE_PROFILE = 'users';
 
-// const SEARCH = 'products/search';

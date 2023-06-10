@@ -84,11 +84,11 @@ class ShopLoginScreen extends StatelessWidget {
                           keyboardType: TextInputType.name,
                           validate: (String? value) {
                             if (value!.isEmpty) {
-                              return 'please enter your email address';
+                              return 'please enter your User name';
                             }
                           },
                           label: 'User name ',
-                          prefix: Icons.email_outlined,
+                          prefix: Icons.person,
                         ),
                         SizedBox(
                           height: 15,

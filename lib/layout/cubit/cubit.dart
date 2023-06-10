@@ -33,7 +33,7 @@ class ShopCubit extends Cubit<ShopStates> {
   List<BottomNavigationBarItem> bottomItem = [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
     BottomNavigationBarItem(icon: Icon(Icons.apps), label: 'Categories'),
-    BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
+    BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
     BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
   ];
 

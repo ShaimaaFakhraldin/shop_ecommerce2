@@ -38,7 +38,7 @@ class CategoriesScreen extends StatelessWidget {
               width: 20,
             ),
             Text(
-              model!,
+              model,
               style: TextStyle(
                 fontSize: 17.0,
                 fontWeight: FontWeight.bold,

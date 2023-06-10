@@ -201,12 +201,12 @@ class ProductsScreen extends StatelessWidget {
                       Expanded(
                         child: IconButton(
                             icon:   Icon(
-                                    Icons.favorite_border,
+                                    Icons.shopping_cart,
                                     size: 17.0,
                                     // color: Colors.white,
                                   ),
                             onPressed: () {
-                              ShopCubit.get(context).changeFavorites(model.id!);
+                              ShopCubit.get(context).changeFavorites(model.id);
                               print(model.id);
                             }),
                       )
