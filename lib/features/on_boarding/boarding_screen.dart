@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_ecommerce/modules/login/shop_login_screen.dart';
 import 'package:shop_ecommerce/shared/components/componets.dart';
 import 'package:shop_ecommerce/shared/network/local/cache_helper.dart';
 import 'package:shop_ecommerce/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../login/shop_login_screen.dart';
 
 class BoardingModel {
   String image;

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shop_ecommerce/layout/cubit/cubit.dart';
-import 'package:shop_ecommerce/layout/shop_layout.dart';
-import 'package:shop_ecommerce/modules/login/shop_login_screen.dart';
-import 'package:shop_ecommerce/modules/on_boarding/boarding_screen.dart';
 import 'package:shop_ecommerce/shared/bloc_observer.dart';
-import 'package:shop_ecommerce/shared/components/constants.dart';
 import 'package:shop_ecommerce/shared/cubit/cubit.dart';
 import 'package:shop_ecommerce/shared/cubit/states.dart';
 import 'package:shop_ecommerce/shared/network/local/cache_helper.dart';
@@ -14,54 +9,38 @@ import 'package:shop_ecommerce/shared/network/remote/dio_helper.dart';
 import 'package:shop_ecommerce/shared/styles/themes.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
+import 'features/login/cubit/cubit.dart';
+import 'features/on_boarding/boarding_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
-  DioHelper.init();
   await CacheHelper.init();
   bool? isDark = CacheHelper.getData(key: 'isDark');
-  Widget? widget;
-  bool ?onBoarding = CacheHelper.getData(key: 'onBoarding');
-   token = CacheHelper.getData(key: 'token');
-  if (onBoarding != null) {
-    if (token != null)
-      widget = ShopLayout();
-    else
-      widget = ShopLoginScreen();
-  } else {
-    widget = OnBoardingScreen();
-  }
+  DioHelper.init();
+
+
   runApp(MyApp(
     isDark: isDark,
-    startWidget: widget,
+    startWidget: OnBoardingScreen(),
   ));
 }
 
-
 class MyApp extends StatelessWidget {
-  final bool ?isDark;
+  final bool? isDark;
   final Widget? startWidget;
 
   MyApp({
     this.isDark,
     this.startWidget,
   });
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => ShopCubit()
-              ..getHomeData()
-              ..getCategories()
-              ..getFavorites()
-              ..getUserData(),
-          ),
-          BlocProvider(
+           BlocProvider(
             create: (BuildContext context) => AppCubit()
-              ..changeAppMode(
-                fromShared: isDark,
-              ),
+              ..changeAppMode( fromShared: isDark)
           ),
         ],
         child: BlocConsumer<AppCubit, AppStates>(

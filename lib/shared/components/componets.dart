@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_ecommerce/shared/styles/colors.dart';
-import 'package:shop_ecommerce/shared/styles/icon_broken.dart';
+// import 'package:shop_ecommerce/shared/styles/icon_broken.dart';
 
 Widget defaultButton(
         {Color background = defaultColor,
@@ -79,7 +79,7 @@ PreferredSizeWidget defaultAppBar({
           Navigator.pop(context);
         },
         icon: Icon(
-          IconBroken.Arrow___Left_2,
+          Icons.arrow_back_ios,
         ),
       ),
       titleSpacing: 5.0,

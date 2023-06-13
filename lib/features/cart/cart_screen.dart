@@ -1,46 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_conditional_rendering/conditional.dart';
-import 'package:shop_ecommerce/layout/cubit/cubit.dart';
-import 'package:shop_ecommerce/layout/cubit/states.dart';
-import 'package:shop_ecommerce/shared/adaptive/adaptivw_indicator.dart';
-import 'package:shop_ecommerce/shared/components/componets.dart';
-import 'package:shop_ecommerce/shared/components/constants.dart';
 import 'package:shop_ecommerce/shared/styles/colors.dart';
 
 class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        if(ShopCubit.get(context).favoritesModel == null){
-           return Center(child: Text('Empty'),);
-        } else{
-          return Conditional.single(
-            context: context,
-            conditionBuilder: (context) => state is! ShopLoadingGetFavoritesState,
-            widgetBuilder: (context) =>ShopCubit.get(context).favoritesModel!.data!.data!.length == 0
-                ? Center(child:Text('You don\'t have item',),)
-                : ListView.separated(
-              physics: BouncingScrollPhysics(),
-              itemBuilder:(context, index){ return Container();},
-              // itemBuilder: (context, index) =>
-              // buildListProduct(ShopCubit.get(context).favoritesModel!.data!.data![index].product, context),
-              separatorBuilder: (context, index) => myDivider(),
-              itemCount:
-              ShopCubit.get(context).favoritesModel!.data!.data!.length,
-            ),
-            fallbackBuilder: (context) => Center(
-                child: AdaptiveIndicator(
-                  os: getOS(),
-                )),
-          );
-        }
-
-      },
-    );
+    return ListView();
   }
 
   Widget buildListProduct(model, context) => Padding(
@@ -114,20 +79,13 @@ class FavoritesScreen extends StatelessWidget {
                         Spacer(),
                         Expanded(
                           child: IconButton(
-                              icon: ShopCubit.get(context).favorites[model.id]!
-                                  ? Icon(
-                                      Icons.favorite,
-                                      size: 17.0,
-                                      color: Colors.red,
-                                    )
-                                  : Icon(
+                              icon:   Icon(
                                       Icons.favorite_border,
                                       size: 17.0,
                                       // color: Colors.white,
                                     ),
                               onPressed: () {
-                                ShopCubit.get(context)
-                                    .changeFavorites(model.id);
+
                                 print(model.id);
                               }),
                         ),

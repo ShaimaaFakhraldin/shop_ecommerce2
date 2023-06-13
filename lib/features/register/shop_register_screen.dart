@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_ecommerce/layout/shop_layout.dart';
-import 'package:shop_ecommerce/modules/register/cubit/cubit.dart';
-import 'package:shop_ecommerce/modules/register/cubit/states.dart';
-import 'package:shop_ecommerce/shared/adaptive/adaptivw_indicator.dart';
-import 'package:shop_ecommerce/shared/components/componets.dart';
-import 'package:shop_ecommerce/shared/components/constants.dart';
-import 'package:shop_ecommerce/shared/network/local/cache_helper.dart';
+ import 'package:shop_ecommerce/shared/components/componets.dart';
 
-import '../login/shop_login_screen.dart';
 
 
 class ShopRegisterScreen extends StatelessWidget
@@ -20,49 +12,9 @@ class ShopRegisterScreen extends StatelessWidget
   var phoneController = TextEditingController();
 
   @override
-  Widget build(BuildContext context)
-  {
-    return BlocProvider(
-      create: (BuildContext context) => ShopRegisterCubit(),
-      child: BlocConsumer<ShopRegisterCubit, ShopRegisterStates>(
-        listener: (context, state)
-        {
-          if (state is ShopRegisterSuccessState)
-          {
-            if (state.loginModel.status)
-            {
-              print(state.loginModel.message);
-              print(state.loginModel.id);
-              token = state.loginModel.id.toString()!;
-              showToast(
-                text: state.loginModel.message!,
-                state: ToastStates.ERROR,
-              );
+  Widget build(BuildContext context){
 
-              CacheHelper.saveData(
-                key: 'token',
-                value: state.loginModel.token.toString(),
-              ).then((value)
-              {
-
-                navigateAndFinish(
-                  context,
-                  ShopLoginScreen(),
-                );
-              });
-            } else {
-              print(state.loginModel.message);
-
-              showToast(
-                text: state.loginModel.message!,
-                state: ToastStates.ERROR,
-              );
-            }
-          }
-        },
-        builder: (context, state)
-        {
-          return Scaffold(
+           return Scaffold(
             appBar: AppBar(),
             body: Center(
               child: SingleChildScrollView(
@@ -119,15 +71,14 @@ class ShopRegisterScreen extends StatelessWidget
                         defaultFormField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
-                          suffix: ShopRegisterCubit.get(context).suffix,
+                          suffix:Icons.visibility_outlined,
                           onSubmit: (value)
                           {
 
                           },
-                          isPassword: ShopRegisterCubit.get(context).isPassword,
+                          isPassword: true,
                           suffixPressed: () {
-                            ShopRegisterCubit.get(context)
-                                .changePasswordVisibility();
+
                           },
                           validate: (String ?value) {
                             if (value!.isEmpty) {
@@ -154,24 +105,12 @@ class ShopRegisterScreen extends StatelessWidget
                         // SizedBox(
                         //   height: 30.0,
                         // ),
-                        (state is! ShopRegisterLoadingState)?defaultButton(
+                       defaultButton(
                           function: () {
-                            if (formKey.currentState!.validate())
-                            {
-                              ShopRegisterCubit.get(context).userRegister(
-                                name: nameController.text,
-                                email: emailController.text,
-                                password: passwordController.text,
-                                // phone: phoneController.text,
-                              );
-                            }
                           },
                           text: 'register',
                           isUpperCase: true,
-                        ):Center(
-                            child: AdaptiveIndicator(
-                              os: getOS(),
-                            )),
+                        )
                       ],
                     ),
                   ),
@@ -179,8 +118,6 @@ class ShopRegisterScreen extends StatelessWidget
               ),
             ),
           );
-        },
-      ),
-    );
+
   }
 }

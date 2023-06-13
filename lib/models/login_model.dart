@@ -1,14 +1,14 @@
 // To parse this JSON data, do
 //
-//     final userData = userDataFromJson(jsonString);
+//     final loginModel = loginModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UserData userDataFromJson(String str) => UserData.fromJson(json.decode(str));
+LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str));
 
-String userDataToJson(UserData data) => json.encode(data.toJson());
+String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
-class UserData {
+class LoginModel {
   int id;
   String username;
   String email;
@@ -18,9 +18,9 @@ class UserData {
   String image;
   String token;
   bool status = false;
-  String message ='';
+  String message ="";
 
-  UserData({
+  LoginModel({
     required this.id,
     required this.username,
     required this.email,
@@ -29,21 +29,17 @@ class UserData {
     required this.gender,
     required this.image,
     required this.token,
-    required this.message,
-    required this.status,
   });
 
-  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
-    id: json["id"] ?? 0,
-    username: json["username"] ?? '',
-    email: json["email"] ?? '',
-    firstName: json["firstName"]?? '',
-    lastName: json["lastName"] ?? '',
-    gender: json["gender"] ?? '',
-    image: json["image"] ?? '',
-    status: json["status"] ?? false,
-    message: json["message"] ?? '',
-    token: json["token"] ??'',
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+    id: json["id"],
+    username: json["username"],
+    email: json["email"],
+    firstName: json["firstName"],
+    lastName: json["lastName"],
+    gender: json["gender"],
+    image: json["image"],
+    token: json["token"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -55,7 +51,5 @@ class UserData {
     "gender": gender,
     "image": image,
     "token": token,
-    "status": status,
-    "message": message,
   };
 }
